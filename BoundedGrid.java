@@ -53,13 +53,18 @@ public class BoundedGrid<E>
 	//	int apples = 0; 
 //loc.getRow(); 
 //loc.getCol();
-if (loc.getRow() < getNumRows() && loc.getCol() < getNumCols()) {
+//if (loc.getRow() < getNumRows() && loc.getCol() < getNumCols()) {
+//	return true;
+//}
+//else { 
+	//return false;
+//}
+if (getNumRows() > loc.getRow() && getNumCols() > loc.getCol() && 
+		loc.getRow() >= 0 && loc.getCol() >= 0) {
 	return true;
-}
-else { 
+} else {
 	return false;
 }
-
 		
 		
 		//throw new RuntimeException("INSERT MISSING CODE HERE");
@@ -71,15 +76,26 @@ else {
 	public E remove(Location loc)
 	{
 		//hint:  use the put method to store a null at this location
-
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		E item = get(loc);
+		put(loc, null);
+		return item;
+		//throw new RuntimeException("INSERT MISSING CODE HERE");
 	}
 
 	// Returns a list of all occupied locations in this grid.
 	public List<Location> getOccupiedLocations()
 	{
 		//hint:  use the get method to determine if a location is empty
-
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		List<Location> list = new ArrayList<Location>();
+		for (int i = 0; i < getNumRows(); i ++) {
+			for (int j = 0; j < getNumCols(); j ++) {
+				Location loc = new Location(i, j);
+				if (get(loc) != null) {
+					list.add(loc);
+				}
+			}
+		}
+		return list;
+		//throw new RuntimeException("INSERT MISSING CODE HERE");
 	}
 }

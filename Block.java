@@ -18,34 +18,41 @@ public class Block
 	// Gets the color of this block.
 	public Color getColor()
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		return color;
+	//	throw new RuntimeException("INSERT MISSING CODE HERE");
 	}
 
 	// Sets the color of this block to newColor.
 	public void setColor(Color newColor)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		color = newColor;
+//		throw new RuntimeException("INSERT MISSING CODE HERE");
 	}
 
 	// Gets the grid of this block,
 	// or null if this block is not contained in a grid.
 	public BoundedGrid<Block> getGrid()
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		return grid;
+		//throw new RuntimeException("INSERT MISSING CODE HERE");
 	}
 
 	// Gets the location of this block,
 	// or null if this block is not contained in a grid.
 	public Location getLocation()
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		return location;
+//		throw new RuntimeException("INSERT MISSING CODE HERE");
 	}
 
 	// Removes this block from its grid.
 	// Precondition:  this block is contained in a grid.
 	public void removeSelfFromGrid()
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		grid.remove(location);
+		grid = null;
+		location = null;
+		//throw new RuntimeException("INSERT MISSING CODE HERE");
 	}
 
 	// Puts this block into location loc of grid gr.
@@ -54,7 +61,14 @@ public class Block
 	//                (2) loc is valid in gr.
 	public void putSelfInGrid(BoundedGrid<Block> gr, Location loc)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		if (gr.get(loc) != null) {
+			gr.get(loc).removeSelfFromGrid();
+		}
+		gr.put(loc, this);
+		location = loc;
+		grid = gr;
+		
+		//throw new RuntimeException("INSERT MISSING CODE HERE");
 	}
 
 	// Moves this block to newLocation.
@@ -63,7 +77,9 @@ public class Block
 	//                (2) newLocation is valid in the grid of this block.
 	public void moveTo(Location newLocation)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		grid.remove(location);
+		this.putSelfInGrid(grid, newLocation);	
+	//	throw new RuntimeException("INSERT MISSING CODE HERE");
 	}
 
 	// Returns a string with the location and color of this block.
